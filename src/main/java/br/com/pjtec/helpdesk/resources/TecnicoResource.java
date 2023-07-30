@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pjtec.helpdesk.domain.Tecnico;
+import br.com.pjtec.helpdesk.domain.dtos.TecnicoDTO;
 import br.com.pjtec.helpdesk.services.TecnicoService;
 
 @RestController
 @RequestMapping(value = "/tecnicos")
 public class TecnicoResource {
 
-	//localhost:8080/tecnicos/1
 	@Autowired
 	private TecnicoService service;
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Tecnico> findById(@PathVariable Integer id){
+	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id){
 		Tecnico obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 		
 	}
 }
