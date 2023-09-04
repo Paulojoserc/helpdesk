@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.pjtec.helpdesk.domain.Chamado;
 
-public class ChamadosDTO implements Serializable {
+public class ChamadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -25,11 +25,11 @@ public class ChamadosDTO implements Serializable {
 	private String nomeTecnico;
 	private String nomeCliente;
 
-	public ChamadosDTO() {
+	public ChamadoDTO() {
 		super();
 	}
 
-	public ChamadosDTO(Chamado obj) {
+	public ChamadoDTO(Chamado obj) {
 		this.id = obj.getId();
 		this.dataAbertura = obj.getDataAbertura();
 		this.dataFechamento = obj.getDataFechamento();

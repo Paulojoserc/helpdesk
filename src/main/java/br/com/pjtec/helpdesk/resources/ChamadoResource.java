@@ -1,5 +1,8 @@
 package br.com.pjtec.helpdesk.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pjtec.helpdesk.domain.Chamado;
-import br.com.pjtec.helpdesk.domain.dtos.ChamadosDTO;
+import br.com.pjtec.helpdesk.domain.dtos.ChamadoDTO;
 import br.com.pjtec.helpdesk.services.ChamadoService;
 
 @RestController
@@ -19,8 +22,15 @@ public class ChamadoResource {
 	private ChamadoService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ChamadosDTO> findById(@PathVariable Integer id){
+	public ResponseEntity<ChamadoDTO> findById(@PathVariable Integer id){
 		Chamado obj =  service.findById(id);
-		return ResponseEntity.ok().body(new ChamadosDTO(obj));
+		return ResponseEntity.ok().body(new ChamadoDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<ChamadoDTO>> findAll(){
+		List<Chamado> list = service.findAll();
+		List<ChamadoDTO> listDTO = list.stream().map(obj -> new ChamadoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
